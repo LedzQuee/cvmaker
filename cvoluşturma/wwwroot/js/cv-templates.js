@@ -85,7 +85,7 @@ var CVTemplateManager = (function () {
 
     function contactLine(pi) {
         var parts = [];
-        if (pi.email) parts.push(esc(pi.email));
+        if (pi.email) parts.push(('<a style="color:inherit;text-decoration:none;" href="mailto:'+esc(pi.email)+'">'+esc(pi.email)+'</a>'));
         if (pi.phone) parts.push(esc(pi.phone));
         if (pi.address) parts.push(esc(pi.address));
         if (pi.driversLicense) parts.push('Ehliyet: ' + esc(pi.driversLicense));
@@ -94,8 +94,8 @@ var CVTemplateManager = (function () {
 
     function linkLine(pi) {
         var parts = [];
-        if (pi.linkedin) parts.push(esc(pi.linkedin));
-        if (pi.website) parts.push(esc(pi.website));
+        if (pi.linkedin) parts.push(('<a style="color:inherit;text-decoration:none;" href="'+esc(pi.linkedin)+'">'+esc(pi.linkedin)+'</a>'));
+        if (pi.website) parts.push(('<a style="color:inherit;text-decoration:none;" href="'+esc(pi.website)+'">'+esc(pi.website)+'</a>'));
         return parts.join(' • ');
     }
 
@@ -223,10 +223,10 @@ var CVTemplateManager = (function () {
         if (name) h += '<div class="sidebar-name">' + esc(name) + '</div>';
         if (pi.email || pi.phone) {
             h += '<div class="sidebar-section"><div class="sidebar-section-title">İletişim</div>';
-            if (pi.email) h += '<div class="sidebar-item">&#9993; ' + esc(pi.email) + '</div>';
+            if (pi.email) h += '<div class="sidebar-item">&#9993; ' + ('<a style="color:inherit;text-decoration:none;" href="mailto:'+esc(pi.email)+'">'+esc(pi.email)+'</a>') + '</div>';
             if (pi.phone) h += '<div class="sidebar-item">&#9742; ' + esc(pi.phone) + '</div>';
             if (pi.address) h += '<div class="sidebar-item">&#9679; ' + esc(pi.address) + '</div>';
-            if (pi.linkedin) h += '<div class="sidebar-item">in: ' + esc(pi.linkedin) + '</div>';
+            if (pi.linkedin) h += '<div class="sidebar-item">in: ' + ('<a style="color:inherit;text-decoration:none;" href="'+esc(pi.linkedin)+'">'+esc(pi.linkedin)+'</a>') + '</div>';
             h += '</div>';
         }
         if (hasEntries(data.skills)) {

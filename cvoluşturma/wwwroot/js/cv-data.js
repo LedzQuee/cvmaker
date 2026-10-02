@@ -15,40 +15,40 @@ const CVDataManager = (function () {
     function getDefaultData() {
         return {
             personalInfo: {
-                firstName: 'Ahmet',
-                lastName: 'Yılmaz',
-                email: 'ahmet.yilmaz@email.com',
-                phone: '+90 555 123 45 67',
-                address: 'Kadıköy, İstanbul',
-                linkedin: 'linkedin.com/in/ahmetyilmaz',
-                website: 'ahmetyilmaz.dev',
-                driversLicense: 'B Sınıfı',
+                firstName: 'Kullanıcı',
+                lastName: 'Adı',
+                email: 'kullanici@ornek.com',
+                phone: '+90 555 000 00 00',
+                address: 'İzmir, Türkiye',
+                linkedin: 'https://linkedin.com/in/kullanici-adi',
+                website: 'https://github.com/ornek-profil',
+                driversLicense: '',
                 photoUrl: ''
             },
-            profileSummary: 'Kullanıcı odaklı ve performanslı web uygulamaları geliştirme konusunda 5 yılı aşkın deneyime sahip Kıdemli Yazılım Mühendisi. C#, .NET Core ve modern JavaScript frameworkleri ile ölçeklenebilir sistemler tasarlama konusunda uzmanım.',
+            profileSummary: 'Modern web teknolojileri ve 3D haritalama üzerine projeler geliştiren, ASP.NET Core, JavaScript ve Python gibi teknolojilere hakim tam yığın (full-stack) yazılım geliştiricisi.',
             education: [
-                { id: 'edu1', school: 'İstanbul Teknik Üniversitesi', degree: 'Lisans', field: 'Bilgisayar Mühendisliği', startDate: '2015', endDate: '2019', description: 'Bölüm 3.sü olarak mezun oldum. Bitirme projesi olarak yapay zeka destekli bir CV analiz aracı geliştirdim.' }
+                { id: 'edu1', school: 'Dokuz Eylül Üniversitesi', degree: 'Lisans', field: 'Bilgisayar / Yazılım', startDate: '', endDate: '', description: 'Web geliştirme, modern yazılım mimarileri ve 3D haritalama sistemleri üzerine çalışmalar.' }
             ],
             experience: [
-                { id: 'exp1', company: 'TechNova Yazılım', position: 'Kıdemli Yazılım Geliştirici', startDate: '2021', endDate: '', current: true, description: '- Mikroservis mimarisine geçiş sürecini yönettim.\n- Sistemin tepki süresini %40 oranında iyileştirdim.\n- 5 kişilik frontend ekibine liderlik ettim.' },
-                { id: 'exp2', company: 'Global Çözümler A.Ş.', position: 'Yazılım Geliştirici', startDate: '2019', endDate: '2021', current: false, description: '- B2B e-ticaret platformunun arayüz bileşenlerini React ile geliştirdim.\n- RESTful API mimarisi tasarladım.' }
+                { id: 'exp1', company: 'Bağımsız Geliştirici', position: 'Full-Stack Developer', startDate: '2022', endDate: '', current: true, description: '- ASP.NET Core ve MVC yapısı kullanılarak veritabanı destekli uygulamalar geliştirildi.\n- Modern frontend (JS, TS, Vite) ve 3D web haritalama (MapLibre vb.) sistemleri üzerine çalışıldı.' }
             ],
             skills: [
                 { id: 'sk1', name: 'C# / .NET Core', level: 'İleri' },
-                { id: 'sk2', name: 'React / JavaScript', level: 'İleri' },
-                { id: 'sk3', name: 'SQL Server / MongoDB', level: 'Orta' },
-                { id: 'sk4', name: 'Docker / Kubernetes', level: 'Orta' }
+                { id: 'sk2', name: 'JavaScript / TypeScript', level: 'İleri' },
+                { id: 'sk3', name: 'HTML5 / CSS3 / Bootstrap', level: 'İleri' },
+                { id: 'sk4', name: 'Python', level: 'Orta' },
+                { id: 'sk5', name: 'Git / GitHub', level: 'İleri' },
+                { id: 'sk6', name: 'SQLite', level: 'Orta' }
             ],
             languages: [
-                { id: 'lang1', name: 'İngilizce', level: 'C1' },
-                { id: 'lang2', name: 'Almanca', level: 'A2' }
+                { id: 'lang1', name: 'İngilizce', level: 'B1' },
+                { id: 'lang2', name: 'Türkçe', level: 'Anadil' }
             ],
-            certifications: [
-                { id: 'cert1', name: 'AWS Certified Developer - Associate', issuer: 'Amazon Web Services', date: '2022' },
-                { id: 'cert2', name: 'Scrum Master (CSM)', issuer: 'Scrum Alliance', date: '2021' }
-            ],
+            certifications: [],
             projects: [
-                { id: 'proj1', name: 'Nova E-Ticaret Altyapısı', role: 'Baş Geliştirici', date: '2023', description: 'Aylık 1 milyon aktif kullanıcısı olan e-ticaret sitesinin sepet ve ödeme altyapısının yenilenmesi.' }
+                { id: 'proj1', name: 'CV Maker Platformu', role: 'Geliştirici', date: '2026', description: 'ASP.NET Core tabanlı, kullanıcıların dinamik olarak CV oluşturup yönetebildiği platform.' },
+                { id: 'proj2', name: 'İzmir 3D Kent Atlası', role: 'Geliştirici', date: '2026', description: 'Vite, JS/TS ve harita kütüphaneleri kullanılarak geliştirilmiş, interaktif 3D kent modeli gösterim aracı.' },
+                { id: 'proj3', name: 'Sinema Bilet Satış Sitesi', role: 'Geliştirici', date: 'Geçmiş', description: 'Kullanıcıların seans seçip koltuk rezervasyonu yapabildiği, bilet satın alma senaryolarını barındıran web tabanlı sistem.' }
             ],
             customSections: []
         };
