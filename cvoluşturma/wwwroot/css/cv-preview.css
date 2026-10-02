@@ -1,0 +1,162 @@
+/* ============================================
+   CV Preview — Önizleme Stilleri
+   Varsayılan CV şablon stili (A4 kağıt)
+   ============================================ */
+
+/* --- Başlık / Header --- */
+.cv-prev-header {
+    text-align: center;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #2563EB;
+}
+
+.cv-prev-name {
+    font-size: 22pt;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: #1E293B;
+    letter-spacing: 0.5px;
+}
+
+.cv-prev-contacts {
+    font-size: 9pt;
+    color: #64748B;
+    margin: 0 0 2px 0;
+}
+
+.cv-prev-links {
+    font-size: 8pt;
+    color: #2563EB;
+    margin: 2px 0 0 0;
+}
+
+/* --- Bölüm Başlığı --- */
+.cv-prev-section {
+    margin-bottom: 14px;
+}
+
+.cv-prev-section-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #1E293B;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin: 0 0 6px 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+/* --- Giriş (Entry) --- */
+.cv-prev-entry {
+    margin-bottom: 10px;
+}
+
+.cv-prev-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.cv-prev-entry-title {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #1E293B;
+}
+
+.cv-prev-entry-date {
+    font-size: 8pt;
+    color: #94A3B8;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.cv-prev-entry-subtitle {
+    font-size: 9pt;
+    color: #64748B;
+    margin-top: 1px;
+}
+
+.cv-prev-entry-desc {
+    font-size: 8.5pt;
+    color: #475569;
+    margin-top: 4px;
+    line-height: 1.5;
+}
+
+.cv-prev-entry-tech {
+    font-size: 8pt;
+    color: #64748B;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+.cv-prev-entry-url {
+    font-size: 7.5pt;
+    color: #2563EB;
+    margin-top: 2px;
+}
+
+/* --- Metin --- */
+.cv-prev-text {
+    font-size: 9pt;
+    color: #475569;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* --- Liste --- */
+.cv-prev-list {
+    font-size: 8.5pt;
+    color: #475569;
+    margin: 4px 0 0 0;
+    padding-left: 16px;
+    line-height: 1.6;
+}
+
+.cv-prev-list li {
+    margin-bottom: 2px;
+}
+
+/* --- Etiketler (Yetenekler) --- */
+.cv-prev-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.cv-prev-tag {
+    font-size: 8.5pt;
+    color: #1E293B;
+    background-color: #F1F5F9;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid #E2E8F0;
+}
+
+.cv-prev-tag-level {
+    font-size: 7.5pt;
+    color: #94A3B8;
+}
+
+/* --- Diller --- */
+.cv-prev-lang-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cv-prev-lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9pt;
+    color: #1E293B;
+    padding: 2px 0;
+}
+
+.cv-prev-lang-level {
+    font-size: 8pt;
+    color: #64748B;
+}

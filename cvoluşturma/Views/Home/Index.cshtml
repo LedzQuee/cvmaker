@@ -1,0 +1,143 @@
+@{
+    ViewData["Title"] = "Kariyerinizi Tasarlayın";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home-3d.css" asp-append-version="true" />
+}
+
+<!-- 1. HERO SCENE -->
+<section class="hero-scene">
+    <div class="canvas-3d">
+        <!-- Floating abstract CV papers -->
+                <div class="floating-cv f-cv-1" data-z="-200" data-rx="10" data-ry="15">
+            <div class="f-cv-line" style="width: 40%"></div>
+            <div class="f-cv-line" style="width: 80%"></div>
+            <div class="f-cv-line" style="width: 70%"></div>
+            <div style="margin-top:20px" class="f-cv-line"></div>
+            <div class="f-cv-line" style="width: 90%"></div>
+        </div>
+        <div class="floating-cv f-cv-2" data-z="-500" data-rx="-5" data-ry="-20">
+            <div class="f-cv-line" style="width: 60%"></div>
+            <div class="f-cv-line" style="width: 80%"></div>
+        </div>
+        <div class="floating-cv f-cv-3" data-z="-800" data-rx="15" data-ry="-10">
+            <div class="f-cv-line" style="width: 30%"></div>
+            <div class="f-cv-line" style="width: 90%"></div>
+        </div>
+        <div class="floating-cv f-cv-4" data-z="-600" data-rx="-15" data-ry="25">
+            <div class="f-cv-line" style="width: 50%"></div>
+        </div>
+    </div>
+    
+        <div class="hero-content container">
+        <h1 class="h-title">Sıradanlığı <br/>Unutun.</h1>
+        <p class="h-subtitle">Kağıt yığınları arasında kaybolan özgeçmişler tarih oldu. Sizi yansıtan, derinliği olan ve akılda kalan profesyonel bir deneyim inşa edin.</p>
+        <a asp-controller="Home" asp-action="Builder" class="cta-btn">Hemen Oluştur</a>
+    </div>
+</section>
+
+<!-- 2. SCROLL TUNNEL SCENE -->
+<section class="scroll-scene">
+    <div class="scroll-sticky">
+        <div class="scroll-text">
+            <h2>Perspektif<br/>Kazanın.</h2>
+        </div>
+                        <div class="tunnel-container">
+            <!-- 8 Different CV Templates flowing automatically -->
+            <div class="tunnel-cv" data-z-offset="-4500" style="left: -200px; top: -100px; background: #F4F7F6; border:1px solid #E2E8F0;">
+                <div style="padding:20px; font-family:serif; font-weight:bold; font-size:1.5rem; color:#2C3E50;">NORDIC</div>
+                <div style="margin:20px; height:10px; width:40%; background:#3498DB;"></div>
+                <div style="margin:20px; height:10px; width:80%; background:#CBD5E1;"></div>
+                <div style="margin:20px; height:10px; width:60%; background:#CBD5E1;"></div>
+            </div>
+            <div class="tunnel-cv" data-z-offset="-4000" style="left: 200px; top: 150px; background: #111; border:1px solid #333; color:#fff;">
+                <div style="padding:20px; font-weight:bold; font-size:1.5rem; letter-spacing:2px;">MONOCHROME</div>
+                <div style="margin:20px; border:1px solid #444; height: 50px; background:#222;"></div>
+                <div style="margin:20px; border:1px solid #444; height: 50px; background:#222;"></div>
+            </div>
+            <div class="tunnel-cv" data-z-offset="-3500" style="left: -150px; top: 200px; background: #F8FAFC;">
+                <div style="padding:20px; font-weight:bold; font-size:1.5rem; color:#0F172A;">BENTO</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 20px;">
+                    <div style="height:80px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.05); border-top:4px solid #3B82F6;"></div>
+                    <div style="height:80px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.05);"></div>
+                </div>
+            </div>
+            <div class="tunnel-cv" data-z-offset="-3000" style="left: 250px; top: -50px; background: #fff; border:1px solid #E5E7EB;">
+                <div style="padding:20px; font-family:serif; font-weight:bold; font-size:1.5rem; text-align:right; color:#111827;">EDITORIAL</div>
+                <div style="margin:20px; height:3px; background:#111827;"></div>
+                <div style="margin:20px; height:10px; width:100%; background:#F3F4F6;"></div>
+                <div style="margin:20px; height:10px; width:100%; background:#F3F4F6;"></div>
+            </div>
+            <div class="tunnel-cv" data-z-offset="-2500" style="left: -250px; top: -200px; background: #fff; border:1px solid #ECFDF5;">
+                <div style="padding:20px; font-weight:bold; font-size:1.5rem; color:#065F46;">TIMELINE</div>
+                <div style="margin:20px; border-left:3px solid #10B981; padding-left:15px; height:100px;">
+                    <div style="height:10px; width:80%; background:#D1FAE5; margin-bottom:10px;"></div>
+                    <div style="height:10px; width:60%; background:#D1FAE5;"></div>
+                </div>
+            </div>
+            <div class="tunnel-cv" data-z-offset="-2000" style="left: 100px; top: 250px; background: #FAFAFA; border:1px solid #E5E5E5;">
+                <div style="padding:20px; font-weight:bold; font-size:1.5rem; color:#171717;">ARCHITECT</div>
+                <div style="display:flex; margin:20px; gap:10px;">
+                    <div style="width:30%; height:100px; background:#F59E0B;"></div>
+                    <div style="width:70%; height:100px; background:#E5E5E5;"></div>
+                </div>
+            </div>
+            <div class="tunnel-cv" data-z-offset="-1500" style="left: 300px; top: 50px; background: #fff; border:1px solid #F3F4F6;">
+                <div style="padding:20px; font-weight:900; font-size:1.5rem; color:#111827;">STUDIO<span style="color:#EF4444">.</span></div>
+                <div style="margin:20px; height:10px; width:50%; background:#FEE2E2;"></div>
+            </div>
+            <div class="tunnel-cv" data-z-offset="-1000" style="left: -100px; top: 100px; background: linear-gradient(135deg, #A8EDE5 0%, #F8ECE5 100%);">
+                <div style="padding:20px; font-weight:bold; font-size:1.5rem; color:#115E59;">FLOATING</div>
+                <div style="margin:20px; height:120px; background:rgba(255,255,255,0.7); backdrop-filter:blur(10px); box-shadow:0 10px 30px rgba(0,0,0,0.1); border-radius:16px;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. HORIZONTAL PROCESS SCENE -->
+<section class="process-scene">
+    <div class="process-sticky">
+        <div class="process-track">
+            <div class="process-step">
+                <div class="process-num">01</div>
+                <h3>Temel Bilgiler</h3>
+                <p>Karmaşık formlar yok. Kim olduğunuzu, nerede durduğunuzu ve nereye gitmek istediğinizi en sade haliyle aktarın.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-num">02</div>
+                <h3>Deneyimler</h3>
+                <p>Geçmişteki başarılarınızı sürükleyip bırakarak kronolojik bir hikayeye dönüştürün. Zengin metin editörüyle vurguları belirleyin.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-num">03</div>
+                <h3>Karakter</h3>
+                <p>Şablonlarımız sadece renk değiştirmez; kendinize uygun editoryal dili, boşlukları ve tipografiyi bularak karakterinizi yansıtın.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-num">04</div>
+                <h3>Çıktı</h3>
+                <p>Mükemmel pikseller. Akıllı sayfa kesimleriyle (pagination) PDF dosyanız yazdırıldığında bile dijitaldeki kusursuzluğunu korur.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. FINAL CTA -->
+<section class="cta-scene">
+    <div class="container">
+        <h2>Kariyerini<br/>Şekillendir.</h2>
+        <a asp-controller="Home" asp-action="Builder" class="cta-btn">Şimdi Başla</a>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/home-3d.js" asp-append-version="true"></script>
+}
+
+
+
+
+
+
+

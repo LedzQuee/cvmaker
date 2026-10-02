@@ -1,0 +1,7 @@
+/* Scoped styles for _Layout.cshtml */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}

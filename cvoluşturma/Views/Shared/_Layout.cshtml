@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NovaCV</title>
+    <link rel="icon" type="image/jpeg" href="~/images/logo.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md">
+            <div class="container">
+                                <a class="navbar-brand" asp-controller="Home" asp-action="Index" style="display:flex; align-items:center;">
+                    <img src="~/images/logo.jpg" alt="NovaCV Logo" style="height:46px; width:46px; margin-right:12px; border-radius:8px; object-fit:cover; mix-blend-mode: multiply; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+                    <span style="font-size:24px; font-weight:800; letter-spacing:-0.5px; color:#1e3a8a;">NovaCV</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                        aria-controls="navbarMain" aria-expanded="false" aria-label="Menüyü aç">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                          <li class="nav-item">
+                              <a class="nav-link" asp-controller="Home" asp-action="Samples" style="font-weight:600; color:#2563eb;">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:4px; margin-bottom:2px;">
+                                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                      <polyline points="14 2 14 8 20 8"></polyline>
+                                      <line x1="16" y1="13" x2="8" y2="13"></line>
+                                      <line x1="16" y1="17" x2="8" y2="17"></line>
+                                      <polyline points="10 9 9 9 8 9"></polyline>
+                                  </svg>
+                                  Örnek CV'ler
+                              </a>
+                          </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Builder">CV Oluştur</a>
+                        </li>
+
+                        @* Giris durumuna gore dinamik auth alani *@
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown">
+                                    <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#1e3a8a,#2563eb);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;">
+                                        @(User.Identity.Name?.Length > 0 ? User.Identity.Name[0].ToString().ToUpper() : "U")
+                                    </span>
+                                    <span style="font-size:13px;color:#334155;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">@User.Identity.Name</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" style="border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.12);border:1px solid #e2e8f0;min-width:180px;">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Home" asp-action="Builder">CV'im</a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form asp-controller="Account" asp-action="Logout" method="post" style="margin:0;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="dropdown-item" style="color:#dc2626;">
+                                                Cikis Yap
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item d-flex align-items-center gap-2" style="margin-left:8px;">
+                                <a asp-controller="Account" asp-action="Login"
+                                   style="font-size:14px;font-weight:600;color:#334155;text-decoration:none;padding:7px 16px;border:1.5px solid #e2e8f0;border-radius:8px;transition:border-color 0.2s;"
+                                   onmouseover="this.style.borderColor='#2563eb'" onmouseout="this.style.borderColor='#e2e8f0'">
+                                    Giris Yap
+                                </a>
+                                <a asp-controller="Account" asp-action="Register"
+                                   style="font-size:14px;font-weight:600;color:#fff;text-decoration:none;padding:7px 16px;background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:8px;transition:opacity 0.2s;"
+                                   onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
+                                    Kayit Ol
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    @if (ViewData["HideFooter"] == null)
+    {
+        <footer class="site-footer">
+            <div class="container text-center">
+                <p class="mb-0">&copy; @DateTime.Now.Year NovaCV &mdash; Profesyonel CV'nizi dakikalar içinde oluşturun.</p>
+            </div>
+        </footer>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+
+
+

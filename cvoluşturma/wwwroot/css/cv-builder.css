@@ -1,0 +1,499 @@
+/* ============================================
+   CV Builder — Sayfa Stilleri
+   ============================================ */
+
+/* --- Page Layout --- */
+.builder-page {
+    min-height: calc(100vh - 120px);
+    background-color: var(--color-bg);
+}
+
+/* --- Split Panel Layout --- */
+.builder-layout {
+    display: flex;
+    gap: 0;
+    height: calc(100vh - 72px);
+    overflow: hidden;
+}
+
+.builder-form-panel {
+    flex: 0 0 50%;
+    max-width: 50%;
+    overflow-y: auto;
+    padding: var(--space-8);
+    background-color: var(--color-bg);
+    border-right: 1px solid var(--color-border);
+}
+
+.builder-preview-panel {
+    flex: 0 0 50%;
+    max-width: 50%;
+    overflow-y: auto;
+    padding: var(--space-6);
+    background-color: #E5E7EB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Stepper --- */
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-1);
+    margin-bottom: var(--space-8);
+    padding: var(--space-4);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+}
+
+.stepper-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    cursor: pointer;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.stepper-item:hover {
+    background-color: var(--color-surface-hover);
+}
+
+.stepper-number {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    background-color: var(--color-surface-hover);
+    color: var(--color-text-muted);
+    border: 2px solid var(--color-border);
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.stepper-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+}
+
+.stepper-divider {
+    width: 20px;
+    height: 1px;
+    background-color: var(--color-border);
+    flex-shrink: 0;
+}
+
+/* Stepper States */
+.stepper-item.active .stepper-number {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+    border-color: var(--color-primary);
+}
+
+.stepper-item.active .stepper-label {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.stepper-item.completed .stepper-number {
+    background-color: var(--color-success);
+    color: var(--color-text-inverse);
+    border-color: var(--color-success);
+}
+
+.stepper-item.completed .stepper-label {
+    color: var(--color-success);
+}
+
+/* --- Form Step Content --- */
+.step-content {
+    display: none;
+}
+
+.step-content.active {
+    display: block;
+}
+
+.step-header {
+    margin-bottom: var(--space-6);
+}
+
+.step-header h2 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-1);
+}
+
+.step-header p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+}
+
+/* --- Form Card --- */
+.form-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+}
+
+/* --- Dynamic Entry (for repeatable sections) --- */
+.entry-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-4);
+    position: relative;
+}
+
+.entry-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.entry-card-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.entry-card-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.btn-entry-action {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: var(--font-size-sm);
+}
+
+.btn-entry-action:hover {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text-primary);
+}
+
+.btn-entry-action.delete:hover {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+}
+
+.btn-add-entry {
+    width: 100%;
+    padding: var(--space-3);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: transparent;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+}
+
+.btn-add-entry:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+}
+
+/* --- Navigation Buttons --- */
+.builder-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-6);
+    margin-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+}
+
+.builder-nav .btn {
+    min-width: 120px;
+}
+
+.step-indicator {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-medium);
+}
+
+/* --- Preview Panel --- */
+.preview-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+}
+
+.preview-header h3 {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.preview-container {
+    width: 210mm;
+    box-sizing: border-box;
+    min-height: 297mm;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-sm);
+    padding: 20mm;
+    font-size: 10pt;
+    line-height: 1.4;
+    color: #333;
+    transform-origin: top center;
+}
+
+.preview-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    color: var(--color-text-muted);
+    text-align: center;
+    padding: var(--space-8);
+}
+
+.preview-placeholder-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-4);
+    opacity: 0.3;
+}
+
+.preview-placeholder p {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-1);
+}
+
+/* --- Mobile Toggle (for responsive) --- */
+.mobile-panel-toggle {
+    display: none;
+    position: fixed;
+    bottom: var(--space-6);
+    right: var(--space-6);
+    z-index: 100;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-lg);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+}
+
+/* --- Responsive --- */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .builder-form-panel {
+        flex: 0 0 55%;
+        max-width: 55%;
+        padding: var(--space-6);
+    }
+
+    .builder-preview-panel {
+        flex: 0 0 45%;
+        max-width: 45%;
+        padding: var(--space-4);
+    }
+
+    .preview-container {
+        width: 100%;
+        min-height: auto;
+        padding: 10mm;
+        transform: none;
+    }
+
+    .stepper-label {
+        display: none;
+    }
+
+    .stepper-divider {
+        width: 12px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .builder-layout {
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 72px);
+    }
+
+    .builder-form-panel {
+        flex: 1 1 auto;
+        max-width: 100%;
+        padding: var(--space-4);
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+        overflow-y: visible;
+    }
+
+    .builder-preview-panel {
+        flex: 1 1 auto;
+        max-width: 100%;
+        padding: var(--space-4);
+        display: none;
+    }
+
+    .builder-preview-panel.mobile-visible {
+        display: flex;
+    }
+
+    .builder-form-panel.mobile-hidden {
+        display: none;
+    }
+
+    .mobile-panel-toggle {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+    }
+
+    .preview-container {
+        width: 100%;
+        min-height: auto;
+        padding: 8mm;
+    }
+
+    .stepper {
+        padding: var(--space-2) var(--space-3);
+        gap: 0;
+    }
+
+    .stepper-item {
+        padding: var(--space-2);
+    }
+
+    .stepper-label {
+        display: none;
+    }
+
+    .stepper-divider {
+        width: 8px;
+    }
+
+    .builder-nav {
+        flex-wrap: wrap;
+        gap: var(--space-3);
+    }
+
+    .builder-nav .btn {
+        min-width: 100px;
+    }
+
+    .step-indicator {
+        order: -1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: var(--space-2);
+    }
+}
+
+/* Modern Date Picker Styles */
+.date-picker-group {
+    display: flex;
+    gap: 8px;
+    position: relative;
+}
+.date-picker-group .form-select {
+    border-radius: 10px;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    font-weight: 500;
+    padding: 0.6rem 1rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.date-picker-group .form-select:hover:not(:disabled) {
+    border-color: #94a3b8;
+    background-color: #f1f5f9;
+}
+.date-picker-group .form-select:focus {
+    border-color: #3b82f6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    outline: none;
+}
+.date-picker-group .form-select:disabled {
+    background-color: #e2e8f0;
+    color: #94a3b8;
+    border-color: #e2e8f0;
+    opacity: 0.7;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ==========================================
+   RESPONSIVE CV PREVIEW — Scaled to fit panel
+   ========================================== */
+
+.builder-preview-panel #previewContent {
+    min-width: 210mm;
+    box-sizing: border-box;
+    transform-origin: top left;
+    transform: scale(var(--preview-scale, 0.6));
+    width: calc(100% / var(--preview-scale, 0.6));
+}
+
+@media (max-width: 1280px) {
+    .builder-preview-panel #previewContent {
+        --preview-scale: 0.55;
+    }
+}
+@media (max-width: 1024px) {
+    .builder-preview-panel #previewContent {
+        --preview-scale: 0.48;
+    }
+}
+@media (max-width: 768px) {
+    .builder-preview-panel #previewContent {
+        --preview-scale: 0.38;
+    }
+}

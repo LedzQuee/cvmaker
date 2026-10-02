@@ -1,0 +1,242 @@
+﻿@{
+    ViewData["Title"] = "Örnek CV'ler";
+}
+<style>
+    .samples-header {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        color: white;
+        margin-bottom: 40px;
+        border-radius: 0 0 24px 24px;
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+    }
+    .samples-header h1 {
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    .samples-header p {
+        font-size: 1.2rem;
+        opacity: 1; color: #f8fafc; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .cv-sample-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 30px;
+        border: 1px solid #eaeaea;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .cv-sample-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+    
+    .cv-sample-img {
+        width: 100%;
+        height: 350px;
+        background-color: #f8fafc;
+        border-bottom: 1px solid #eaeaea;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cv-sample-img img {
+        width: 80%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: transform 0.5s ease;
+    }
+    .cv-sample-card:hover .cv-sample-img img {
+        transform: scale(1.05);
+    }
+
+    .cv-sample-body {
+        padding: 24px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .cv-sample-body h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 10px;
+    }
+    .cv-sample-body p {
+        color: #64748b;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        flex-grow: 1;
+    }
+    .btn-use-template {
+        background: #3b82f6;
+        color: white;
+        font-weight: 600;
+        padding: 12px 20px;
+        border-radius: 12px;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.2s ease;
+        display: block;
+        width: 100%;
+    }
+    .btn-use-template:hover {
+        background: #2563eb;
+        color: white;
+    }
+    
+    /* Mock CV styles for the placeholders */
+    .mock-cv {
+        width: 70%;
+        height: 85%;
+        background: white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .mock-cv-header {
+        display: flex;
+        gap: 15px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+    .mock-cv-photo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #e2e8f0;
+    }
+    .mock-cv-lines {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        justify-content: center;
+    }
+    .mock-line { height: 6px; background: #e2e8f0; border-radius: 3px; }
+    .mock-line.short { width: 40%; }
+    .mock-line.medium { width: 70%; }
+    .mock-line.long { width: 100%; }
+    .mock-line.blue { background: #3b82f6; }
+    .mock-line.dark { background: #475569; }
+</style>
+
+<div class="samples-header">
+    <div class="container">
+        <h1>İlham Veren Örnek CV'ler</h1>
+        <p>NovaCV ile oluşturulmuş profesyonel özgeçmiş örneklerini inceleyin. İstediğiniz şablonu seçerek hemen kendi CV'nizi hazırlamaya başlayabilirsiniz.</p>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row">
+        <!-- Örnek 1 -->
+        <div class="col-lg-4 col-md-6">
+            <div class="cv-sample-card">
+                <div class="cv-sample-img">
+                    <div class="mock-cv" style="flex-direction: row; padding:0; overflow:hidden;">
+                        <div style="width:35%; background:#1e293b; color:white; padding:15px; display:flex; flex-direction:column; gap:10px;">
+                            <div class="mock-cv-photo" style="margin: 0 auto;"></div>
+                            <div style="font-size:8px; text-align:center; font-weight:bold; margin-top:5px;">İletişim</div>
+                            <div style="font-size:6px; color:#cbd5e1;">ahmet@yilmaz.com<br/>+90 555 123 4567<br/>İstanbul, TR</div>
+                            <div style="font-size:8px; font-weight:bold; margin-top:10px;">Yetenekler</div>
+                            <div style="font-size:6px; color:#cbd5e1;">C# .NET (İleri)<br/>JavaScript (İleri)<br/>React (Orta)</div>
+                        </div>
+                        <div style="width:65%; padding:15px; display:flex; flex-direction:column; gap:10px;">
+                            <div style="font-size:14px; font-weight:bold; color:#0f172a; border-bottom:1px solid #e2e8f0; padding-bottom:5px;">Ahmet Yılmaz</div>
+                            <div style="font-size:10px; font-weight:bold; color:#334155; margin-top:5px;">Deneyim</div>
+                            <div>
+                                <div style="font-size:8px; font-weight:bold;">Kıdemli Yazılım Geliştirici</div>
+                                <div style="font-size:7px; color:#64748b;">TechCorp Inc. | 2021 - Günümüz</div>
+                                <div style="font-size:6px; margin-top:3px; color:#334155;">- Mikroservis mimarisi tasarımı.<br/>- Performans optimizasyonları.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cv-sample-body">
+                    <h3>Kenar Çubuklu Tasarım</h3>
+                    <p>Özellikle yazılımcılar ve tasarımcılar için ideal. Sol panelde öne çıkan yetenekler, sağ panelde ise detaylı deneyim geçmişi bulunur.</p>
+                    <a href="/Home/Builder?template=sidebar" class="btn-use-template">Bu Şablonla Oluştur</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Örnek 2 -->
+        <div class="col-lg-4 col-md-6">
+            <div class="cv-sample-card">
+                <div class="cv-sample-img">
+                    <div class="mock-cv">
+                        <div class="mock-cv-header" style="justify-content:center; text-align:center; flex-direction:column; align-items:center;">
+                            <div style="font-size:16px; font-weight:bold; font-family:serif;">Ayşe Demir</div>
+                            <div style="font-size:9px; font-family:serif; color:#475569;">Avukat & Hukuk Danışmanı</div>
+                            <div style="font-size:7px; font-family:serif; color:#64748b;">ayse.demir@hukuk.com | Ankara, TR | linkedin.com/in/ayse</div>
+                        </div>
+                        <div style="font-family:serif; margin-top:10px;">
+                            <div style="font-size:10px; font-weight:bold; border-bottom:1px solid #000; padding-bottom:2px; margin-bottom:5px;">Eğitim</div>
+                            <div style="font-size:8px; font-weight:bold;">Ankara Üniversitesi, Hukuk Fakültesi</div>
+                            <div style="font-size:7px; color:#475569;">Lisans Derecesi | 2015 - 2019</div>
+                        </div>
+                        <div style="font-family:serif; margin-top:5px;">
+                            <div style="font-size:10px; font-weight:bold; border-bottom:1px solid #000; padding-bottom:2px; margin-bottom:5px;">İş Deneyimi</div>
+                            <div style="font-size:8px; font-weight:bold;">Avukat, ABC Hukuk Bürosu</div>
+                            <div style="font-size:7px; color:#475569;">2020 - Devam Ediyor</div>
+                            <div style="font-size:7px; margin-top:3px;">- Ticaret hukuku ve şirket birleşmeleri konusunda danışmanlık.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cv-sample-body">
+                    <h3>Klasik Türkçe (Kurumsal)</h3>
+                    <p>Geleneksel ve ciddi sektörler (finans, hukuk vb.) için vazgeçilmez. Düz ve güçlü tipografisiyle deneyimlerinizi en net şekilde aktarır.</p>
+                    <a href="/Home/Builder?template=classic" class="btn-use-template">Bu Şablonla Oluştur</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Örnek 3 -->
+        <div class="col-lg-4 col-md-6">
+            <div class="cv-sample-card">
+                <div class="cv-sample-img">
+                    <div class="mock-cv" style="gap:10px; background:#f8fafc; border:1px solid #e2e8f0; padding:15px; border-radius:12px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div class="mock-cv-photo" style="width:40px; height:40px; background:#3b82f6;"></div>
+                            <div style="text-align:right;">
+                                <div style="font-size:14px; font-weight:900; color:#0f172a;">Can Özkan</div>
+                                <div style="font-size:9px; font-weight:600; color:#3b82f6;">UX/UI Tasarımcı</div>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                            <div style="background:#fff; padding:10px; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+                                <div style="font-size:9px; font-weight:bold; color:#0f172a; margin-bottom:4px;">Hakkımda</div>
+                                <div style="font-size:6px; color:#64748b; line-height:1.4;">Kullanıcı deneyimini merkeze alan, estetik ve işlevsel arayüzler tasarlayan yaratıcı profesyonel.</div>
+                            </div>
+                            <div style="background:#fff; padding:10px; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+                                <div style="font-size:9px; font-weight:bold; color:#0f172a; margin-bottom:4px;">Beceriler</div>
+                                <div style="font-size:6px; color:#64748b; line-height:1.4;">Figma, Adobe XD<br/>Wireframing<br/>Prototyping</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cv-sample-body">
+                    <h3>Bento Grid Modern</h3>
+                    <p>En yenilikçi şirketlere başvururken fark yaratın. Bilgilerinizi modern kartlar halinde sunarak okumayı kolaylaştıran trend bir tasarım.</p>
+                    <a href="/Home/Builder?template=bento" class="btn-use-template">Bu Şablonla Oluştur</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

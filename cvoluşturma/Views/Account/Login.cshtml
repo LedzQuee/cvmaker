@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .auth-wrapper {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 16px;
+        background: linear-gradient(135deg, #f0f4ff 0%, #fafbff 100%);
+    }
+    .auth-card {
+        width: 100%;
+        max-width: 440px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 8px 40px rgba(37, 99, 235, 0.10);
+        padding: 48px 40px 40px;
+    }
+    .auth-logo { text-align: center; margin-bottom: 28px; }
+    .auth-logo span { font-size: 28px; font-weight: 800; color: #1e3a8a; letter-spacing: -0.5px; }
+    .auth-title { font-size: 22px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
+    .auth-sub { color: #64748b; font-size: 14px; margin-bottom: 28px; }
+    .auth-label { font-weight: 600; font-size: 14px; color: #334155; margin-bottom: 6px; }
+    .auth-input {
+        width: 100%; padding: 12px 16px; border: 1.5px solid #e2e8f0;
+        border-radius: 10px; font-size: 15px; transition: border 0.2s;
+        outline: none; background: #f8fafc;
+    }
+    .auth-input:focus { border-color: #2563eb; background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+    .auth-btn {
+        width: 100%; padding: 13px; background: linear-gradient(135deg, #1e3a8a, #2563eb);
+        color: #fff; font-weight: 700; font-size: 16px; border: none;
+        border-radius: 10px; cursor: pointer; margin-top: 8px; transition: opacity 0.2s;
+    }
+    .auth-btn:hover { opacity: 0.92; }
+    .auth-error { background: #fef2f2; border: 1px solid #fca5a5; color: #b91c1c;
+        border-radius: 10px; padding: 12px 16px; font-size: 14px; margin-bottom: 16px; }
+    .auth-link { text-align: center; margin-top: 20px; font-size: 14px; color: #64748b; }
+    .auth-link a { color: #2563eb; font-weight: 600; text-decoration: none; }
+    .auth-link a:hover { text-decoration: underline; }
+    .form-group { margin-bottom: 18px; }
+</style>
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-logo">
+            <img src="~/images/logo.jpg" alt="NovaCV" style="height:52px;width:52px;border-radius:12px;object-fit:cover;mix-blend-mode:multiply;margin-bottom:10px;">
+            <br><span>NovaCV</span>
+        </div>
+        <div class="auth-title">Tekrar Hoşgeldin </div>
+        <div class="auth-sub">CV'ne devam etmek için giriş yap.</div>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="auth-error">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>️ @error.ErrorMessage</div>
+                }
+            </div>
+        }
+
+        <form asp-action="Login" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+
+            <div class="form-group">
+                <label class="auth-label">E-posta</label>
+                <input type="email" name="email" class="auth-input" placeholder="ornek@email.com" required autofocus />
+            </div>
+            <div class="form-group">
+                <label class="auth-label">Şifre</label>
+                <input type="password" name="password" class="auth-input" placeholder="••••••••" required />
+            </div>
+
+            <button type="submit" class="auth-btn">Giriş Yap →</button>
+        </form>
+
+        <div class="auth-link">
+            Hesabın yok mu? <a asp-controller="Account" asp-action="Register">Kayıt Ol</a>
+        </div>
+    </div>
+</div>

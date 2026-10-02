@@ -1,0 +1,333 @@
+﻿/* ============================================
+   PREMIUM 3D LANDING PAGE STYLES
+   ============================================ */
+
+:root {
+    --bg-light: #FAFAFA;
+    --bg-dark: #0A0A0A;
+    --text-light: #FFFFFF;
+    --text-dark: #111111;
+    --accent: #E5E5E5;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.home-page {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Typography */
+.h-title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 0;
+}
+.h-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 400;
+    color: #666;
+    letter-spacing: -0.01em;
+    margin-top: 1.5rem;
+    max-width: 600px;
+}
+
+/* 1. Hero Section */
+.hero-scene {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1500px;
+    overflow: visible;
+    background: var(--bg-light);
+}
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+.cta-btn {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 1.2rem 3rem;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    pointer-events: auto;
+    transition: transform 0.3s var(--ease-out), background 0.3s;
+}
+.cta-btn:hover {
+    transform: scale(1.05);
+    background: #222;
+    color: #fff;
+}
+
+/* Floating 3D Elements */
+.canvas-3d {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    pointer-events: none;
+}
+.floating-cv {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #EAEAEA;
+    border-radius: 12px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+    /* content placeholders */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.f-cv-line { background: #F0F0F0; border-radius: 4px; height: 12px; }
+.f-cv-1 { width: 300px; height: 420px; top: 15%; left: 10%; transform: translateZ(-200px) rotateY(15deg) rotateX(10deg); }
+.f-cv-2 { width: 250px; height: 350px; bottom: 10%; right: 15%; transform: translateZ(-500px) rotateY(-20deg) rotateX(-5deg); }
+.f-cv-3 { width: 350px; height: 480px; top: 20%; right: -5%; transform: translateZ(-800px) rotateY(-10deg) rotateX(15deg); opacity: 0.7;}
+.f-cv-4 { width: 200px; height: 280px; bottom: 20%; left: -5%; transform: translateZ(-600px) rotateY(25deg) rotateX(-15deg); opacity: 0.6;}
+
+
+/* 2. Z-Scroll Showcase */
+.scroll-scene {
+    position: relative;
+    height: 120vh;
+    background: var(--bg-dark);
+    color: var(--text-light);
+}
+.scroll-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    perspective: 2000px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.scroll-text {
+    position: absolute;
+    z-index: 20;
+    text-align: center;
+    pointer-events: none;
+}
+.scroll-text h2 {
+    font-size: clamp(2rem, 5vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: #fff;
+    text-shadow: 0 10px 40px rgba(0,0,0,1), 0 2px 15px rgba(0,0,0,1), 0 0 50px rgba(0,0,0,0.8);
+}
+.tunnel-container {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform-style: preserve-3d;
+}
+.tunnel-cv {
+    position: absolute;
+    width: 320px; height: 450px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 16px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+.tunnel-cv img {
+    width: 100%; height: 100%; object-fit: cover; opacity: 0.5;
+}
+
+
+/* 3. Horizontal Process */
+.process-scene { position: relative; padding: 15vh 0; background: var(--bg-light); }
+.process-sticky { display: block; overflow: hidden; }
+.process-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding: 0 10vw; }
+.process-step { display: flex; flex-direction: column; }
+.process-num {
+    font-size: 8rem;
+    font-weight: 800;
+    color: #E0E0E0;
+    line-height: 1;
+    margin-bottom: -1rem;
+}
+.process-step h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+}
+.process-step p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+
+/* 4. Physical Templates Desk */
+.desk-scene {
+    padding: 15vh 0;
+    background: #F4F4F5;
+    perspective: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+.desk-title {
+    text-align: center;
+    margin-bottom: 10vh;
+}
+.desk-title h2 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+.desk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    transform-style: preserve-3d;
+    transform: rotateX(45deg) rotateZ(-20deg);
+    transition: transform 1s var(--ease-out);
+}
+.desk-scene:hover .desk-grid {
+    transform: rotateX(10deg) rotateZ(0deg);
+}
+.desk-card {
+    width: 260px;
+    height: 360px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 20px 20px 40px rgba(0,0,0,0.1), -1px -1px 0 rgba(255,255,255,1);
+    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    cursor: pointer;
+}
+.desk-card:hover {
+    transform: translateZ(50px) translateY(-20px);
+    box-shadow: 30px 40px 60px rgba(0,0,0,0.15);
+}
+
+
+/* 5. Minimal Features */
+.features-scene {
+    padding: 20vh 10vw;
+    background: var(--text-dark);
+    color: var(--text-light);
+}
+.feature-row {
+    display: flex;
+    align-items: flex-start;
+    border-top: 1px solid #333;
+    padding: 4rem 0;
+}
+.feature-row h3 {
+    flex: 1;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+.feature-row p {
+    flex: 1;
+    font-size: 1.2rem;
+    color: #999;
+    line-height: 1.6;
+    margin: 0;
+    padding-left: 2rem;
+}
+
+
+/* 6. Final CTA */
+.cta-scene {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-light);
+    text-align: center;
+}
+.cta-scene h2 {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    margin-bottom: 2rem;
+}
+.cta-scene .cta-btn {
+    font-size: 1.3rem;
+    padding: 1.5rem 4rem;
+}
+
+@media (max-width: 768px) {
+    .desk-grid { grid-template-columns: 1fr; transform: none; }
+    .desk-scene:hover .desk-grid { transform: none; }
+    .feature-row { flex-direction: column; gap: 1rem; }
+    .feature-row p { padding-left: 0; }
+    .process-track { grid-template-columns: 1fr; gap: 40px; }
+    .process-step { flex: 0 0 80vw; }
+}
+
+@keyframes floatPaper {
+    0% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+    33% { transform: translateY(-20px) rotateX(2deg) rotateY(-2deg); }
+    66% { transform: translateY(15px) rotateX(-2deg) rotateY(2deg); }
+    100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+}
+
+.floating-cv {
+    /* Base styles already applied */
+}
+/* We need to apply animation on an inner wrapper or use it instead of JS transform */
+
+
+
+
+
+
+
+
+.floating-logo {
+    position: absolute;
+    top: 55%;
+    left: 70%;
+    transform-origin: center center;
+    will-change: transform;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Smooth gradient transition from hero to scroll-scene */
+.hero-scene::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: linear-gradient(to bottom, transparent 0%, #0a0a0a 100%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.hero-scene .hero-content {
+    padding-bottom: 120px;
+}
