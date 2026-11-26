@@ -71,13 +71,8 @@ app.Use(async (context, next) =>
     headers["Content-Security-Policy"] =
         "default-src 'self'; " +
         "script-src 'self' 'unsafe-inline' " +
-            "https://cdnjs.cloudflare.com " +
-            "https://cdn.quilljs.com " +
-            "https://cdn.jsdelivr.net " +
-            "https://cdn.bootstrapcdn.com; " +
+            "https://cdnjs.cloudflare.com; " +
         "style-src 'self' 'unsafe-inline' " +
-            "https://cdn.quilljs.com " +
-            "https://cdn.bootstrapcdn.com " +
             "https://fonts.googleapis.com " +
             "https://cdnjs.cloudflare.com; " +
         "font-src 'self' " +

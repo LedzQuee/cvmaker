@@ -497,3 +497,96 @@
         --preview-scale: 0.38;
     }
 }
+
+/* ==========================================
+   PDF BUTONLARI + ATS PUANI PANELI
+   ========================================== */
+.pdf-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.pdf-actions .btn-link { color: #64748b; text-decoration: none; font-size: 12px; padding-left: 4px; padding-right: 4px; }
+.pdf-actions .btn-link:hover { color: #1e293b; text-decoration: underline; }
+
+.ats-score-badge {
+    display: inline-block; min-width: 26px; margin-left: 4px; padding: 1px 6px;
+    border-radius: 10px; font-size: 11px; font-weight: 700; background: #e2e8f0; color: #334155;
+}
+.ats-score-badge.good { background: #dcfce7; color: #166534; }
+.ats-score-badge.ok   { background: #fef3c7; color: #92400e; }
+.ats-score-badge.bad  { background: #fee2e2; color: #991b1b; }
+
+.ats-panel {
+    position: fixed; top: 0; right: 0; bottom: 0; width: 400px; max-width: 100vw;
+    background: #fff; box-shadow: -8px 0 30px rgba(15, 23, 42, .15); z-index: 1060;
+    transform: translateX(105%); transition: transform .25s ease; display: flex; flex-direction: column;
+}
+.ats-panel.open { transform: translateX(0); }
+.ats-bar { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid #e2e8f0; }
+.ats-close { border: 0; background: none; font-size: 24px; line-height: 1; color: #64748b; cursor: pointer; }
+.ats-body { padding: 18px; overflow-y: auto; flex: 1; font-size: 14px; color: #1e293b; }
+.ats-body h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: #64748b; margin: 22px 0 10px; }
+
+.ats-head { display: flex; align-items: center; gap: 16px; }
+.ats-ring {
+    --c: #64748b; width: 84px; height: 84px; border-radius: 50%; flex-shrink: 0;
+    background: conic-gradient(var(--c) calc(var(--p) * 1%), #e2e8f0 0);
+    display: grid; place-items: center;
+}
+.ats-ring span { width: 66px; height: 66px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 24px; font-weight: 800; }
+.ats-ring.good { --c: #16a34a; } .ats-ring.ok { --c: #d97706; } .ats-ring.bad { --c: #dc2626; }
+.ats-level { font-size: 18px; font-weight: 700; }
+.ats-level.good { color: #16a34a; } .ats-level.ok { color: #d97706; } .ats-level.bad { color: #dc2626; }
+.ats-sub { font-size: 12.5px; color: #64748b; margin-top: 2px; }
+
+.ats-todo { list-style: none; padding: 0; margin: 0; }
+.ats-todo li { border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+.ats-todo-top { display: flex; justify-content: space-between; gap: 8px; }
+.ats-todo-top span { color: #16a34a; font-weight: 700; font-size: 12px; white-space: nowrap; }
+.ats-todo p { margin: 4px 0 0; font-size: 13px; color: #475569; }
+.ats-done { color: #166534; background: #f0fdf4; padding: 10px 12px; border-radius: 8px; }
+
+.ats-hint { font-size: 12.5px; color: #64748b; margin: 0 0 8px; }
+#atsJobAd { width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 10px; font-size: 13px; resize: vertical; }
+.ats-kw { margin-top: 12px; }
+.ats-kw-title { font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
+.kw { display: inline-block; padding: 2px 8px; margin: 0 4px 4px 0; border-radius: 12px; font-size: 12px; }
+.kw.miss { background: #fee2e2; color: #991b1b; }
+.kw.hit { background: #dcfce7; color: #166534; }
+.ats-foot { margin-top: 18px; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+
+.pdf-hint-toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 1070;
+    max-width: 520px; width: calc(100% - 32px); background: #1e293b; color: #fff;
+    padding: 12px 16px; border-radius: 10px; font-size: 13.5px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    transition: opacity .5s ease;
+}
+.pdf-hint-toast.hide { opacity: 0; }
+
+@media (max-width: 768px) {
+    .pdf-actions .btn-link { display: none; }
+}
+
+/* Form adımlarındaki ATS rehberi */
+.ats-safe-pill {
+    font-size: 11.5px; font-weight: 600; color: #166534; background: #dcfce7;
+    padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+}
+.ats-coach { margin: 0 0 16px 0; }
+.ats-coach-tip {
+    background: #f0fdfa; border: 1px solid #99f6e4; color: #134e4a;
+    border-radius: 8px; padding: 10px 12px; font-size: 13px; line-height: 1.5;
+}
+.ats-coach-tag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    background: #0f766e; color: #fff; border-radius: 4px; padding: 1px 6px; margin-right: 4px; vertical-align: 1px;
+}
+.ats-coach-warn {
+    list-style: none; margin: 8px 0 0; padding: 0;
+}
+.ats-coach-warn li {
+    background: #fffbeb; border: 1px solid #fde68a; color: #78350f;
+    border-radius: 8px; padding: 8px 12px 8px 30px; font-size: 13px; margin-bottom: 6px; position: relative;
+}
+.ats-coach-warn li::before { content: "!"; position: absolute; left: 11px; top: 7px; font-weight: 800; color: #d97706; }
+
+/* Önizleme başlığı dar ekranda taşmasın, alt satıra geçsin */
+.builder-preview-panel .preview-header { flex-wrap: wrap; gap: 8px; }
+.builder-preview-panel .preview-header .btn { white-space: nowrap; }

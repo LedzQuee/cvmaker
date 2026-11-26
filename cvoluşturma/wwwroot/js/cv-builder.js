@@ -99,9 +99,9 @@ const CVBuilder = (function () {
         const urlParams = new URLSearchParams(window.location.search);
         const templateParam = urlParams.get('template');
         if (templateParam && typeof CVTemplateManager !== 'undefined') {
-            CVTemplateManager.setTemplate(templateParam);
+            CVTemplateManager.setTemplate(templateParam); // eski şablon adları yenilerine eşlenir
             var selectEl = document.getElementById('templateSelector');
-            if (selectEl) selectEl.value = templateParam;
+            if (selectEl) selectEl.value = CVTemplateManager.getCurrentTemplate().id;
         }
 
         renderAllDynamicSections();
@@ -706,6 +706,16 @@ const CVBuilder = (function () {
         var selectEl = document.getElementById('templateSelector');
         if (!selectEl) return;
 
+        // Seçenekleri şablon listesinden üret (yeni şablon eklemek için sayfayı değiştirmeye gerek kalmasın)
+        selectEl.innerHTML = '';
+        CVTemplateManager.getTemplates().forEach(function (t) {
+            var opt = document.createElement('option');
+            opt.value = t.id;
+            opt.textContent = t.name;
+            opt.title = t.desc || '';
+            selectEl.appendChild(opt);
+        });
+
         var current = CVTemplateManager.getCurrentTemplate();
         selectEl.value = current.id;
 
@@ -717,121 +727,158 @@ const CVBuilder = (function () {
     }
 
     // ==========================================
-    // PDF DÅA AKTARMA (html2pdf.js)
+    // PDF DIŞA AKTARMA (ATS uyumlu, gerçek metin)
     // ==========================================
-    
-        function bindPdfExportEvent() {
+    function bindPdfExportEvent() {
         if (!els.btnDownloadPdf) return;
 
         els.btnDownloadPdf.addEventListener('click', function() {
-            var _chkData = CVDataManager.getData();
-            var _chkPi = (_chkData && _chkData.personalInfo) ? _chkData.personalInfo : {};
-            if (!_chkPi.firstName || !_chkPi.lastName) {
+            var d = CVDataManager.getData();
+            var pi = (d && d.personalInfo) ? d.personalInfo : {};
+            if (!pi.firstName || !pi.lastName) {
                 alert('PDF oluşturmak için lütfen önce Adınızı ve Soyadınızı girin (1. Adım: Kişisel Bilgiler).');
                 return;
             }
-            // Artık modal yok, direkt indir
-            executePdfExport(els.btnDownloadPdf, null);
-        });
-    }
-
-    function executePdfExport(btn, modal) {
-        var originalText = btn.innerHTML;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Hazirlaniyor...';
-        btn.disabled = true;
-
-        var data = CVDataManager.getData();
-        var firstName = data.personalInfo.firstName || 'CV';
-        var lastName  = data.personalInfo.lastName  || '';
-        var fileName  = (firstName + '_' + lastName).trim().replace(/\s+/g, '_') + '_CV.pdf';
-
-        var content = els.previewContent.innerHTML;
-
-        // Tum CSS'leri topla (builder.css haric)
-        var cssLinks  = '';
-        var cssStyles = '';
-        document.querySelectorAll('link[rel="stylesheet"]').forEach(function(l) {
-            if (!l.href || !l.href.includes('cv-builder.css')) cssLinks += l.outerHTML;
-        });
-        document.querySelectorAll('style').forEach(function(s) {
-            cssStyles += s.outerHTML;
-        });
-
-        // Yeni pencerede temiz render
-        var pdfWin = window.open('', '_blank', 'width=900,height=1200');
-        if (!pdfWin) {
-            alert('Lutfen pop-up engelleyiciye izin verin.');
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            return;
-        }
-
-        pdfWin.document.write('<!DOCTYPE html><html lang="tr"><head>');
-        pdfWin.document.write('<meta charset="utf-8">');
-        pdfWin.document.write('<title>' + fileName + '</title>');
-        pdfWin.document.write(cssLinks);
-        pdfWin.document.write(cssStyles);
-        pdfWin.document.write('<style>');
-        pdfWin.document.write('@page { size: A4 portrait; margin: 0; }');
-        pdfWin.document.write('* { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }');
-        pdfWin.document.write('html, body { margin: 0; padding: 0; width: 100%; background: #fff; }');
-        pdfWin.document.write('.cv-tpl { width: 100% !important; margin: 0 !important; box-shadow: none !important; transform: none !important; box-sizing: border-box !important; }');
-        // Yazdir butonunu goster - kullanici PDF olarak kaydedebilir
-        pdfWin.document.write('.pdf-save-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: #1e3a8a; color: #fff; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; font-family: Inter, sans-serif; font-size: 14px; }');
-        pdfWin.document.write('.pdf-save-bar button { background: #fff; color: #1e3a8a; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 14px; }');
-        pdfWin.document.write('@media print { .pdf-save-bar { display: none !important; } body { margin-top: 0 !important; } }');
-        pdfWin.document.write('body.has-bar { margin-top: 60px; }');
-        pdfWin.document.write('</style>');
-        pdfWin.document.write('</head><body class="has-bar">');
-        pdfWin.document.write('<div class="pdf-save-bar">');
-        pdfWin.document.write('<span>Kaydetmek icin: <strong>Ctrl+P</strong> → Hedef: <strong>PDF olarak kaydet</strong> → Kenar boslugu: <strong>Yok</strong></span>');
-        pdfWin.document.write('<button onclick="window.print()">PDF Kaydet</button>');
-        pdfWin.document.write('</div>');
-        pdfWin.document.write(content);
-        pdfWin.document.write('</body></html>');
-        pdfWin.document.close();
-
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-        if (modal) { setTimeout(function(){ modal.hide(); }, 300); }
-    }
-
-            function executePrint() {
-        var content = els.previewContent.innerHTML;
-        var printWindow = window.open('', '_blank', 'width=1000,height=900');
-        if (!printWindow) {
-            alert("Lütfen yazdırma penceresi için pop-up engelleyiciye izin verin.");
-            return;
-        }
-        
-        printWindow.document.write('<html><head><title>CV Yazdır - NovaCV</title>');
-        
-        // Ana sayfadaki CSS'leri al
-        var styles = document.querySelectorAll('link[rel="stylesheet"], style');
-        styles.forEach(function(s) { 
-            // cv-builder.css'i alma, sadece template ve bootstrap kalsın
-            if (!s.href || !s.href.includes('cv-builder.css')) {
-                printWindow.document.write(s.outerHTML); 
+            // Düşük ATS puanında indirmeden önce uyar
+            if (typeof CVAtsScorer !== 'undefined') {
+                var r = CVAtsScorer.score();
+                if (r && r.score < 70) {
+                    var top = r.checks.filter(function(c) { return c.tip; })
+                        .sort(function(a, b) { return (b.max - b.got) - (a.max - a.got); })
+                        .slice(0, 3)
+                        .map(function(c) { return '• ' + c.label + ' (+' + (c.max - c.got) + ')'; });
+                    var msg = 'ATS puanın ' + r.score + '/100. İşe alım sistemleri bu CV\'yi düşük puanlayabilir.\n\n' +
+                        'En çok puan getirecek düzeltmeler:\n' + top.join('\n') +
+                        '\n\nYine de PDF oluşturulsun mu? ("İptal" dersen ATS önerilerini açarım.)';
+                    if (!confirm(msg)) { CVAtsScorer.open(); return; }
+                }
             }
+            printTextPdf();
         });
-        
-        // Özel Print CSS'i
-        printWindow.document.write('<style>');
-        printWindow.document.write('@page { size: A4 portrait; margin: 0; }');
-        printWindow.document.write('html, body { margin: 0; padding: 0; width: 100%; background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }');
-        printWindow.document.write('.cv-tpl { width: 100% !important; margin: 0 !important; box-shadow: none !important; transform: none !important; box-sizing: border-box !important; }');
-        printWindow.document.write('</style>');
-        
-        printWindow.document.write('</head><body>');
-        printWindow.document.write(content);
-        printWindow.document.write('</body></html>');
-        printWindow.document.close();
-        
-        setTimeout(function() {
-            printWindow.focus();
-            printWindow.print();
-            // printWindow.close(); // Kullanıcı isterse sekmeyi kendi kapatır, bazen erken kapanırsa yazdırma iptal oluyor
-        }, 800);
+    }
+
+    // Tarayıcının kendi "PDF olarak kaydet" özelliği gerçek, seçilebilir metin üretir.
+    // İşe alım sistemleri (ATS) ve yapay zeka puanlayıcıları bu metni okuyabilir.
+    // Gizli bir iframe kullanılır, açılır pencere engelleyicisine takılmaz.
+    function printTextPdf() {
+        var data = CVDataManager.getData();
+        var pi = data.personalInfo || {};
+        var title = ((pi.firstName || 'CV') + ' ' + (pi.lastName || '')).trim() + ' - CV';
+
+        var head = '';
+        document.querySelectorAll('link[rel="stylesheet"]').forEach(function(l) {
+            var href = l.getAttribute('href') || '';
+            if (/cv-templates|fonts\.googleapis/.test(href)) head += l.outerHTML;
+        });
+
+        var html = '<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><title>' + escHtml(title) + '</title>' + head +
+            '<style>' +
+            '@page { size: A4 portrait; margin: 0; }' +
+            'html, body { margin: 0; padding: 0; background: #fff; }' +
+            '* { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }' +
+            '.cv-tpl { width: 210mm !important; margin: 0 !important; box-shadow: none !important; transform: none !important; }' +
+            '</style></head><body>' + els.previewContent.innerHTML + '</body></html>';
+
+        var old = document.getElementById('atsPrintFrame');
+        if (old) old.remove();
+        var frame = document.createElement('iframe');
+        frame.id = 'atsPrintFrame';
+        frame.setAttribute('aria-hidden', 'true');
+        // Ekran dışında ama gerçek A4 genişliğinde; tek sayfaya sığdırma ölçümü burada da çalışsın
+        frame.style.cssText = 'position:fixed;left:-10000px;top:0;width:210mm;height:297mm;border:0;visibility:hidden;';
+        document.body.appendChild(frame);
+
+        var doc = frame.contentDocument;
+        doc.open(); doc.write(html); doc.close();
+
+        // Chrome kaydedilen dosyanın adını üst sayfanın başlığından alır
+        var oldTitle = document.title;
+        var go = function() {
+            var fontsReady = (doc.fonts && doc.fonts.ready) ? doc.fonts.ready : Promise.resolve();
+            fontsReady.then(function() {
+                var tpl = doc.querySelector('.cv-tpl');
+                if (tpl) fitOnePage(tpl);
+                setTimeout(function() {
+                    document.title = title;
+                    frame.contentWindow.focus();
+                    frame.contentWindow.print();
+                    setTimeout(function() { document.title = oldTitle; }, 1000);
+                }, 150);
+            });
+        };
+        if (doc.readyState === 'complete') go(); else frame.onload = go;
+        showPdfHint();
+    }
+
+    // A4 yüksekliği (297mm) CSS pikseli olarak
+    var A4_HEIGHT_PX = 1122;
+    // Bu oranın altına küçültmeyiz; yazı okunmaz hale gelir, o zaman 2 sayfa kalır
+    var MIN_FIT_ZOOM = 0.8;
+
+    // CV bir sayfayı az farkla aşıyorsa önce boşlukları daraltır, gerekirse hepsini
+    // orantılı küçültür. Metin gerçek metin olarak kalır (zoom resim üretmez).
+    function fitOnePage(el) {
+        var parent = el.parentElement;
+        if (!parent || !parent.offsetWidth) return null; // görünmüyorsa ölçülemez
+
+        // Önizleme kutusu transform: scale ile küçültülüyor; gerçek boyu bulmak için o oranı geri al
+        var scale = parent.getBoundingClientRect().width / parent.offsetWidth || 1;
+        var height = function() { return el.getBoundingClientRect().height / scale; };
+        var applyZoom = function(z) {
+            el.style.zoom = z;
+            // zoom genişliği de küçültür; sayfa genişliği 210mm kalsın
+            el.style.setProperty('width', (210 / z).toFixed(2) + 'mm', 'important');
+        };
+
+        el.classList.remove('tpl-tight');
+        el.style.removeProperty('zoom');
+        el.style.removeProperty('width');
+        if (height() <= A4_HEIGHT_PX) return { pages: 1, zoom: 1 };
+
+        el.classList.add('tpl-tight');
+        if (height() <= A4_HEIGHT_PX) return { pages: 1, zoom: 1 };
+
+        applyZoom(MIN_FIT_ZOOM);
+        if (height() > A4_HEIGHT_PX) {
+            // Okunur boyutta sığmıyor: 2 sayfa kalsın
+            el.classList.remove('tpl-tight');
+            el.style.removeProperty('zoom');
+            el.style.removeProperty('width');
+            return { pages: 2, zoom: 1 };
+        }
+        // Sığan en büyük oranı bul (zoom değişince satırlar yeniden kırıldığı için ikili arama)
+        var lo = MIN_FIT_ZOOM, hi = 1;
+        for (var i = 0; i < 7; i++) {
+            var mid = (lo + hi) / 2;
+            applyZoom(mid);
+            if (height() <= A4_HEIGHT_PX) lo = mid; else hi = mid;
+        }
+        lo = Math.floor(lo * 1000) / 1000;
+        applyZoom(lo);
+        return { pages: 1, zoom: lo };
+    }
+
+    // Yazı tipleri geç yüklenince ve pencere boyu değişince önizlemeyi yeniden sığdır
+    function refitPreview() {
+        var tpl = els.previewContent && els.previewContent.querySelector('.cv-tpl');
+        if (tpl) fitOnePage(tpl);
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(refitPreview);
+    window.addEventListener('resize', function() {
+        clearTimeout(window._refitTimer);
+        window._refitTimer = setTimeout(refitPreview, 200);
+    });
+
+    function showPdfHint() {
+        if (document.getElementById('pdfHintToast')) return;
+        var t = document.createElement('div');
+        t.id = 'pdfHintToast';
+        t.className = 'pdf-hint-toast';
+        t.innerHTML = '<strong>Yazdırma penceresinde:</strong> Hedef olarak <b>PDF olarak kaydet</b>\'i seçip <b>Kaydet</b>\'e basın. ' +
+            'Bu PDF gerçek metin içerir; işe alım sistemleri (ATS) okuyabilir.';
+        document.body.appendChild(t);
+        setTimeout(function() { t.classList.add('hide'); }, 7000);
+        setTimeout(function() { t.remove(); }, 7600);
     }
 
     var _autoSaveTimer = null;
@@ -870,7 +917,10 @@ const CVBuilder = (function () {
         } else {
             els.previewContent.innerHTML = renderPreviewFallback(data);
         }
-    
+        // Önizleme PDF ile aynı görünsün: sayfayı biraz aşan CV tek sayfaya sığdırılır
+        var tpl = els.previewContent.querySelector('.cv-tpl');
+        if (tpl) fitOnePage(tpl);
+
         } catch (err) {
             console.error(err);
             alert("Önizleme Hatası: " + err.message);
@@ -1129,6 +1179,8 @@ function syncWithBackend() {
 
 // --- LOAD FROM BACKEND ---
 window.addEventListener('DOMContentLoaded', function() {
+    // Giris yapilmamissa sunucuya hic sorma (gereksiz 401 hatasini onler)
+    if (!window._isLoggedIn) return;
     fetch('/api/CvApi/load')
         .then(function(res) {
             if (res.status === 401) {
@@ -1308,3 +1360,26 @@ setTimeout(initSortableFixed, 1500);
 
 
 
+
+
+// --- ÖNİZLEMEYİ PANELE SIĞDIR ---
+// Sabit ölçek değerleri (0.6 / 0.55 / 0.48) panel genişliğine uymayınca CV sağdan kesiliyordu.
+// Ölçeği panelin gerçek genişliğinden hesapla.
+(function () {
+    function fitPreview() {
+        var cont = document.getElementById('cvPreview');
+        var pc = document.getElementById('previewContent');
+        if (!cont || !pc) return;
+        var cs = getComputedStyle(cont);
+        var avail = cont.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+        if (avail <= 0) return;
+        var scale = Math.min(1, Math.max(0.2, avail / 794));
+        pc.style.setProperty('--preview-scale', scale.toFixed(4));
+    }
+    window.addEventListener('resize', fitPreview);
+    window.addEventListener('DOMContentLoaded', function () {
+        fitPreview();
+        var cont = document.getElementById('cvPreview');
+        if (cont && 'ResizeObserver' in window) new ResizeObserver(fitPreview).observe(cont);
+    });
+})();
